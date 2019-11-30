@@ -1,13 +1,14 @@
 pipeline{
     agent any
     environment{
-        provaN2EC = "$WORKSPACE/prova_ec2-jenkins-Fabio_Chagas"
+        provaN2EC = "$WORKSPACE/ProvaN2"
     }
     stages{
         stage ('Criando ambiente'){
             steps {
                 echo 'Criando wrapper para gradle'
-                dir("$provaN2EC"){
+              	dir("$provaN2EC"){
+				sh 'gradle wrapper'
                 }
             }
 
@@ -16,7 +17,7 @@ pipeline{
             steps{
                 echo 'Criando testes JUnit'
                 dir("$provaN2EC"){
-
+				sh './gradlew test'
                 }
             }
         }
@@ -24,7 +25,7 @@ pipeline{
             steps{
                 echo 'Construindo o APK'
                 dir("$provaN2EC"){
-
+				sh './gradlew assembleRelease'
                 }
             }
         }
