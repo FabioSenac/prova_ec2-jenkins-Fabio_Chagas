@@ -1,0 +1,38 @@
+pipeline{
+    agent any
+    environment{
+        provaN2EC = "$WORKSPACE/prova_ec2-jenkins-Fabio_Chagas"
+    }
+    stages{
+        stage ('Criando ambiente'){
+            steps {
+                echo 'Criando wrapper para gradle'
+                dir("$provaN2EC"){
+                }
+            }
+
+        }
+        stage ('Criando Testes JUnit'){
+            steps{
+                echo 'Criando testes JUnit'
+                dir("$provaN2EC"){
+
+                }
+            }
+        }
+        stage ('Construindo o APK'){
+            steps{
+                echo 'Construindo o APK'
+                dir("$provaN2EC"){
+
+                }
+            }
+        }
+        stage ('Arquivando o APK'){
+            steps{
+                echo 'Arquivando o APK'
+                archiveArtifacts artifacts: '**/app_debug.apk', fingerprint:false , allowEmptyArchive: true
+            }
+        }
+    }
+}
